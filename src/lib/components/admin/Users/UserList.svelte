@@ -126,20 +126,6 @@
 />
 <UserChatsModal bind:show={showUserChatsModal} user={selectedUser} />
 
-{#if ($config?.license_metadata?.seats ?? null) !== null && users.length > $config?.license_metadata?.seats}
-	<div class=" mt-1 mb-2 text-xs text-red-500">
-		<Banner
-			className="mx-0"
-			banner={{
-				type: 'error',
-				title: 'License Error',
-				content:
-					'Exceeded the number of seats in your license. Please contact support to increase the number of seats.',
-				dismissable: true
-			}}
-		/>
-	</div>
-{/if}
 
 <div class="mt-0.5 mb-2 gap-1 flex flex-col md:flex-row justify-between">
 	<div class="flex md:self-center text-lg font-medium px-0.5">
@@ -488,26 +474,3 @@
 
 <Pagination bind:page count={users.length} />
 
-{#if !$config?.license_metadata}
-	{#if users.length > 50}
-		<div class="text-sm">
-			<Markdown
-				content={`
-> [!NOTE]
-> # **Hey there! 👋**
->
-> It looks like you have over 50 users — that usually falls under organizational usage.
-> 
-> Open WebUI is proudly open source and completely free, with no hidden limits — and we'd love to keep it that way. 🌱  
->
-> By supporting the project through sponsorship or an enterprise license, you’re not only helping us stay independent, you’re also helping us ship new features faster, improve stability, and grow the project for the long haul. With an *enterprise license*, you also get additional perks like dedicated support, customization options, and more — all at a fraction of what it would cost to build and maintain internally.  
-> 
-> Your support helps us stay independent and continue building great tools for everyone. 💛
-> 
-> - 👉 **[Click here to learn more about enterprise licensing](https://docs.openwebui.com/enterprise)**
-> - 👉 *[Click here to sponsor the project on GitHub](https://github.com/sponsors/tjbck)*
-`}
-			/>
-		</div>
-	{/if}
-{/if}

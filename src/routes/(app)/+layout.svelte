@@ -193,7 +193,7 @@
 			});
 
 			if ($user?.role === 'admin' && ($settings?.showChangelog ?? true)) {
-				showChangelog.set($settings?.version !== $config.version);
+				showChangelog.set(false);
 			}
 
 			if ($user?.permissions?.chat?.temporary ?? true) {
@@ -208,17 +208,7 @@
 
 			// Check for version updates
 			if ($user?.role === 'admin') {
-				// Check if the user has dismissed the update toast in the last 24 hours
-				if (localStorage.dismissedUpdateToast) {
-					const dismissedUpdateToast = new Date(Number(localStorage.dismissedUpdateToast));
-					const now = new Date();
-
-					if (now - dismissedUpdateToast > 24 * 60 * 60 * 1000) {
-						checkForVersionUpdates();
-					}
-				} else {
-					checkForVersionUpdates();
-				}
+				// Removed version update check
 			}
 			await tick();
 		}
@@ -227,12 +217,11 @@
 	});
 
 	const checkForVersionUpdates = async () => {
-		version = await getVersionUpdates(localStorage.token).catch((error) => {
-			return {
-				current: WEBUI_VERSION,
-				latest: WEBUI_VERSION
-			};
-		});
+		// Disabled version update check
+		version = {
+			current: WEBUI_VERSION,
+			latest: WEBUI_VERSION
+		};
 	};
 </script>
 

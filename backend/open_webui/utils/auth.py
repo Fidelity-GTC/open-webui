@@ -71,34 +71,7 @@ def override_static(path: str, content: str):
 
 
 def get_license_data(app, key):
-    if key:
-        try:
-            res = requests.post(
-                "https://api.openwebui.com/api/v1/license/",
-                json={"key": key, "version": "1"},
-                timeout=5,
-            )
-
-            if getattr(res, "ok", False):
-                payload = getattr(res, "json", lambda: {})()
-                for k, v in payload.items():
-                    if k == "resources":
-                        for p, c in v.items():
-                            globals().get("override_static", lambda a, b: None)(p, c)
-                    elif k == "count":
-                        setattr(app.state, "USER_COUNT", v)
-                    elif k == "name":
-                        setattr(app.state, "WEBUI_NAME", v)
-                    elif k == "metadata":
-                        setattr(app.state, "LICENSE_METADATA", v)
-                return True
-            else:
-                log.error(
-                    f"License: retrieval issue: {getattr(res, 'text', 'unknown error')}"
-                )
-        except Exception as ex:
-            log.exception(f"License: Uncaught Exception: {ex}")
-    return False
+    return True
 
 
 bearer_security = HTTPBearer(auto_error=False)
