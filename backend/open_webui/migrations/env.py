@@ -1,3 +1,11 @@
+import os
+import sys
+
+# Add project root directory to sys.path
+# This allows Alembic to find the 'open_webui' package
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, PROJECT_ROOT)
+
 from logging.config import fileConfig
 
 from alembic import context
