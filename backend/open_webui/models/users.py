@@ -35,10 +35,6 @@ class User(Base):
 
     oauth_sub = Column(Text, unique=True)
 
-    # Auto Model Settings
-    default_text_model_id = Column(String, nullable=True)
-    default_multimodal_model_id = Column(String, nullable=True)
-
 
 class UserSettings(BaseModel):
     ui: Optional[dict] = {}
@@ -62,10 +58,6 @@ class UserModel(BaseModel):
     info: Optional[dict] = None
 
     oauth_sub: Optional[str] = None
-
-    # Auto Model Settings
-    default_text_model_id: Optional[str] = None
-    default_multimodal_model_id: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)
 
